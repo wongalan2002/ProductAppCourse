@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:productapp/core/models/productModel.dart';
 import 'package:productapp/ui/views/productDetails.dart';
 
-
 class ProductCard extends StatelessWidget {
   final Product productDetails;
 
@@ -11,40 +10,32 @@ class ProductCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){
-        Navigator.push(context, MaterialPageRoute(builder: (_) => ProductDetails(product: productDetails)));
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (_) => ProductDetails(product: productDetails)));
       },
       child: Padding(
         padding: EdgeInsets.all(8),
         child: Card(
           elevation: 5,
           child: Container(
-            height: MediaQuery
-                .of(context)
-                .size
-                .height * 0.45,
-            width: MediaQuery
-                .of(context)
-                .size
-                .width * 0.9,
+            height: MediaQuery.of(context).size.height * 0.45,
+            width: MediaQuery.of(context).size.width * 0.9,
             child: Column(
               children: <Widget>[
                 Hero(
                   tag: productDetails.id,
                   child: Image.asset(
                     'assets/${productDetails.img}.jpg',
-                    height: MediaQuery
-                        .of(context)
-                        .size
-                        .height *
-                        0.35,
+                    height: MediaQuery.of(context).size.height * 0.35,
                   ),
                 ),
                 Padding(
                   padding: EdgeInsets.all(16),
                   child: Row(
-                    mainAxisAlignment:
-                    MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
                       Text(
                         productDetails.name,
@@ -72,4 +63,3 @@ class ProductCard extends StatelessWidget {
     );
   }
 }
-

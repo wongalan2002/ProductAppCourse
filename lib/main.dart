@@ -5,10 +5,6 @@ import './ui/router.dart';
 import './locator.dart';
 import './core/viewmodels/CRUDModel.dart';
 
-// void main() {
-//   setupLocator();
-//   runApp(MyApp());
-// }
 void main() async {
   setupLocator();
   WidgetsFlutterBinding.ensureInitialized();

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:productapp/core/models/productModel.dart';
 import 'package:provider/provider.dart';
 import '../../core/viewmodels/CRUDModel.dart';
+
 class AddProduct extends StatefulWidget {
   @override
   _AddProductState createState() => _AddProductState();
@@ -10,12 +11,12 @@ class AddProduct extends StatefulWidget {
 class _AddProductState extends State<AddProduct> {
   final _formKey = GlobalKey<FormState>();
   String productType = 'Bag';
-  String title ;
-  String price ;
+  String title;
+  String price;
 
   @override
   Widget build(BuildContext context) {
-    var productProvider = Provider.of<CRUDModel>(context) ;
+    var productProvider = Provider.of<CRUDModel>(context);
     return Scaffold(
       appBar: AppBar(
         title: Center(
@@ -29,35 +30,35 @@ class _AddProductState extends State<AddProduct> {
           child: Column(
             children: <Widget>[
               TextFormField(
-                decoration: InputDecoration(
-                  border: InputBorder.none,
-                  hintText: 'Product Title',
-                  fillColor: Colors.grey[300],
-                  filled: true,
-                ),
-                validator: (value) {
-                  if (value.isEmpty) {
-                    return 'Please enter Product Title';
-                  }
-                },
-                  onSaved: (value) => title = value
+                  decoration: InputDecoration(
+                    border: InputBorder.none,
+                    hintText: 'Product Title',
+                    fillColor: Colors.grey[300],
+                    filled: true,
+                  ),
+                  validator: (value) {
+                    if (value.isEmpty) {
+                      return 'Please enter Product Title';
+                    }
+                  },
+                  onSaved: (value) => title = value),
+              SizedBox(
+                height: 16,
               ),
-              SizedBox(height: 16,),
               TextFormField(
-                keyboardType: TextInputType.numberWithOptions(),
-                decoration: InputDecoration(
-                  border: InputBorder.none,
-                  hintText: 'Price',
-                  fillColor: Colors.grey[300],
-                  filled: true,
-                ),
-                validator: (value) {
-                  if (value.isEmpty) {
-                    return 'Please enter The price';
-                  }
-                },
-                  onSaved: (value) => price = value
-              ),
+                  keyboardType: TextInputType.numberWithOptions(),
+                  decoration: InputDecoration(
+                    border: InputBorder.none,
+                    hintText: 'Price',
+                    fillColor: Colors.grey[300],
+                    filled: true,
+                  ),
+                  validator: (value) {
+                    if (value.isEmpty) {
+                      return 'Please enter The price';
+                    }
+                  },
+                  onSaved: (value) => price = value),
               DropdownButton<String>(
                 value: productType,
                 onChanged: (String newValue) {
@@ -65,7 +66,7 @@ class _AddProductState extends State<AddProduct> {
                     productType = newValue;
                   });
                 },
-                items: <String>['Bag', 'Computer', 'Dress', 'Phone','Shoes']
+                items: <String>['Bag', 'Computer', 'Dress', 'Phone', 'Shoes']
                     .map<DropdownMenuItem<String>>((String value) {
                   return DropdownMenuItem<String>(
                     value: value,
@@ -75,17 +76,20 @@ class _AddProductState extends State<AddProduct> {
               ),
               RaisedButton(
                 splashColor: Colors.red,
-                onPressed: () async{
+                onPressed: () async {
                   if (_formKey.currentState.validate()) {
                     _formKey.currentState.save();
-                    await productProvider.addProduct(Product(name: title,price: price,img: productType.toLowerCase()));
-                    Navigator.pop(context) ;
+                    await productProvider.addProduct(Product(
+                        name: title,
+                        price: price,
+                        img: productType.toLowerCase()));
+                    Navigator.pop(context);
                   }
                 },
-                child: Text('add Product', style: TextStyle(color: Colors.white)),
+                child:
+                    Text('add Product', style: TextStyle(color: Colors.white)),
                 color: Colors.blue,
               )
-
             ],
           ),
         ),
