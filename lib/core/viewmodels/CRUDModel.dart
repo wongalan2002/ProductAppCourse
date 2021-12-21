@@ -6,15 +6,15 @@ import '../models/productModel.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class CRUDModel extends ChangeNotifier {
-  Api _api = locator<Api>();
+  Api _api = getIt<Api>();
 
   List<Product> products;
 
 
   Future<List<Product>> fetchProducts() async {
     var result = await _api.getDataCollection();
-    products = result.documents
-        .map((doc) => Product.fromMap(doc.data, doc.documentID))
+    products = result.docs
+        .map((doc) => Product.fromMap(doc.data(), doc.id))
         .toList();
     return products;
   }
@@ -25,7 +25,7 @@ class CRUDModel extends ChangeNotifier {
 
   Future<Product> getProductById(String id) async {
     var doc = await _api.getDocumentById(id);
-    return  Product.fromMap(doc.data, doc.documentID) ;
+    return  Product.fromMap(doc.data(), doc.id) ;
   }
 
 

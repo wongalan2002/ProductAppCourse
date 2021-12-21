@@ -32,8 +32,8 @@ class _HomeViewState extends State<HomeView> {
             stream: productProvider.fetchProductsAsStream(),
             builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
               if (snapshot.hasData) {
-                products = snapshot.data.documents
-                    .map((doc) => Product.fromMap(doc.data, doc.documentID))
+                products = snapshot.data.docs
+                    .map((doc) => Product.fromMap(doc.data(), doc.id))
                     .toList();
                 return ListView.builder(
                   itemCount: products.length,

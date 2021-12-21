@@ -4,9 +4,9 @@ import 'package:get_it/get_it.dart';
 import './core/services/api.dart';
 import './core/viewmodels/CRUDModel.dart';
 
-GetIt locator = GetIt();
+GetIt getIt = GetIt.instance;
 
 void setupLocator() {
-  locator.registerLazySingleton(() => Api('products'));
-  locator.registerLazySingleton(() => CRUDModel()) ;
+  getIt.registerLazySingleton(() => Api('products'));
+  getIt.registerLazySingleton(() => CRUDModel()) ;
 }
