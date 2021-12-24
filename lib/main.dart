@@ -18,8 +18,8 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-            create: (_) => getIt<CRUDModel>()
-        ),
+            // create: (_) => getIt<CRUDModel>()
+            create: (_) => CRUDModel()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
