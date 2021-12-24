@@ -11,7 +11,7 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-  List<Product> products;
+  late List<Product> products;
 
   @override
   Widget build(BuildContext context) {
@@ -32,8 +32,8 @@ class _HomeViewState extends State<HomeView> {
             stream: productProvider.fetchProductsAsStream(),
             builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
               if (snapshot.hasData) {
-                products = snapshot.data.docs
-                    .map((doc) => Product.fromMap(doc.data(), doc.id))
+                products = snapshot.data!.docs
+                    .map((doc) => Product.fromMap(doc.data() as Map<dynamic, dynamic>, doc.id))
                     .toList();
                 return ListView.builder(
                   itemCount: products.length,

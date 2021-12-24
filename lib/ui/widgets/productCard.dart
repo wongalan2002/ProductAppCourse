@@ -5,7 +5,7 @@ import 'package:productapp/ui/views/productDetails.dart';
 class ProductCard extends StatelessWidget {
   final Product productDetails;
 
-  ProductCard({@required this.productDetails});
+  ProductCard({required this.productDetails});
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,7 @@ class ProductCard extends StatelessWidget {
             child: Column(
               children: <Widget>[
                 Hero(
-                  tag: productDetails.id,
+                  tag: productDetails.id!,
                   child: Image.asset(
                     'assets/${productDetails.img}.jpg',
                     height: MediaQuery.of(context).size.height * 0.35,
@@ -38,7 +38,7 @@ class ProductCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
                       Text(
-                        productDetails.name,
+                        productDetails.name!,
                         style: TextStyle(
                             fontWeight: FontWeight.w900,
                             fontSize: 22,

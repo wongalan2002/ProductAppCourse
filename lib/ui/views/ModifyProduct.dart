@@ -3,11 +3,10 @@ import 'package:productapp/core/models/productModel.dart';
 import 'package:productapp/core/viewmodels/CRUDModel.dart';
 import 'package:provider/provider.dart';
 
-
 class ModifyProduct extends StatefulWidget {
   final Product product;
 
-  ModifyProduct({@required this.product});
+  ModifyProduct({required this.product});
 
   @override
   _ModifyProductState createState() => _ModifyProductState();
@@ -16,16 +15,17 @@ class ModifyProduct extends StatefulWidget {
 class _ModifyProductState extends State<ModifyProduct> {
   final _formKey = GlobalKey<FormState>();
 
-  String productType ;
+  String? productType;
 
-  String title ;
+  String? title;
 
-  String price ;
+  String? price;
 
   @override
   Widget build(BuildContext context) {
     final productProvider = Provider.of<CRUDModel>(context);
-    productType =  widget.product.img[0].toUpperCase() + widget.product.img.substring(1);
+    productType =
+        widget.product.img![0].toUpperCase() + widget.product.img!.substring(1);
     return Scaffold(
       appBar: AppBar(
         title: Center(
@@ -47,13 +47,14 @@ class _ModifyProductState extends State<ModifyProduct> {
                     filled: true,
                   ),
                   validator: (value) {
-                    if (value.isEmpty) {
+                    if (value!.isEmpty) {
                       return 'Please enter Product Title';
                     }
                   },
-                  onSaved: (value) => title = value
+                  onSaved: (value) => title = value),
+              SizedBox(
+                height: 16,
               ),
-              SizedBox(height: 16,),
               TextFormField(
                   initialValue: widget.product.price,
                   keyboardType: TextInputType.numberWithOptions(),
@@ -64,20 +65,19 @@ class _ModifyProductState extends State<ModifyProduct> {
                     filled: true,
                   ),
                   validator: (value) {
-                    if (value.isEmpty) {
+                    if (value!.isEmpty) {
                       return 'Please enter The price';
                     }
                   },
-                  onSaved: (value) => price = value
-              ),
+                  onSaved: (value) => price = value),
               DropdownButton<String>(
                 value: productType,
-                onChanged: (String newValue) {
+                onChanged: (String? newValue) {
                   setState(() {
                     productType = newValue;
                   });
                 },
-                items: <String>['Bag', 'Computer', 'Dress', 'Phone','Shoes']
+                items: <String>['Bag', 'Computer', 'Dress', 'Phone', 'Shoes']
                     .map<DropdownMenuItem<String>>((String value) {
                   return DropdownMenuItem<String>(
                     value: value,
@@ -87,17 +87,22 @@ class _ModifyProductState extends State<ModifyProduct> {
               ),
               RaisedButton(
                 splashColor: Colors.red,
-                onPressed: () async{
-                  if (_formKey.currentState.validate()) {
-                    _formKey.currentState.save();
-                    await productProvider.updateProduct(Product(name: title,price: price,img: productType.toLowerCase()),widget.product.id);
-                    Navigator.pop(context) ;
+                onPressed: () async {
+                  if (_formKey.currentState!.validate()) {
+                    _formKey.currentState!.save();
+                    await productProvider.updateProduct(
+                        Product(
+                            name: title,
+                            price: price,
+                            img: productType!.toLowerCase()),
+                        widget.product.id);
+                    Navigator.pop(context);
                   }
                 },
-                child: Text('Modify Product', style: TextStyle(color: Colors.white)),
+                child: Text('Modify Product',
+                    style: TextStyle(color: Colors.white)),
                 color: Colors.blue,
               )
-
             ],
           ),
         ),

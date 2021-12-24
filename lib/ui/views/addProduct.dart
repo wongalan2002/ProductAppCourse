@@ -10,9 +10,9 @@ class AddProduct extends StatefulWidget {
 
 class _AddProductState extends State<AddProduct> {
   final _formKey = GlobalKey<FormState>();
-  String productType = 'Bag';
-  String title;
-  String price;
+  String? productType = 'Bag';
+  String? title;
+  String? price;
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +37,7 @@ class _AddProductState extends State<AddProduct> {
                     filled: true,
                   ),
                   validator: (value) {
-                    if (value.isEmpty) {
+                    if (value!.isEmpty) {
                       return 'Please enter Product Title';
                     }
                   },
@@ -54,14 +54,14 @@ class _AddProductState extends State<AddProduct> {
                     filled: true,
                   ),
                   validator: (value) {
-                    if (value.isEmpty) {
+                    if (value!.isEmpty) {
                       return 'Please enter The price';
                     }
                   },
                   onSaved: (value) => price = value),
               DropdownButton<String>(
                 value: productType,
-                onChanged: (String newValue) {
+                onChanged: (String? newValue) {
                   setState(() {
                     productType = newValue;
                   });
@@ -77,12 +77,12 @@ class _AddProductState extends State<AddProduct> {
               RaisedButton(
                 splashColor: Colors.red,
                 onPressed: () async {
-                  if (_formKey.currentState.validate()) {
-                    _formKey.currentState.save();
+                  if (_formKey.currentState!.validate()) {
+                    _formKey.currentState!.save();
                     await productProvider.addProduct(Product(
                         name: title,
                         price: price,
-                        img: productType.toLowerCase()));
+                        img: productType!.toLowerCase()));
                     Navigator.pop(context);
                   }
                 },
