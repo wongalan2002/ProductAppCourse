@@ -74,7 +74,7 @@ class _AddProductState extends State<AddProduct> {
                   );
                 }).toList(),
               ),
-              RaisedButton(
+              MaterialButton(
                 splashColor: Colors.red,
                 onPressed: () async {
                   if (_formKey.currentState!.validate()) {

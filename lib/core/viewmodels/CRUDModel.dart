@@ -10,11 +10,11 @@ class CRUDModel extends ChangeNotifier {
 
   List<Product>? products;
 
-
   Future<List<Product>?> fetchProducts() async {
     var result = await _api!.getDataCollection();
     products = result.docs
-        .map((doc) => Product.fromMap(doc.data() as Map<dynamic, dynamic>, doc.id))
+        .map((doc) =>
+            Product.fromMap(doc.data() as Map<dynamic, dynamic>, doc.id))
         .toList();
     return products;
   }
@@ -25,25 +25,24 @@ class CRUDModel extends ChangeNotifier {
 
   Future<Product> getProductById(String id) async {
     var doc = await _api!.getDocumentById(id);
-    return  Product.fromMap(doc.data() as Map<dynamic, dynamic>, doc.id) ;
+    return Product.fromMap(doc.data() as Map<dynamic, dynamic>, doc.id);
   }
 
-
-  Future removeProduct(String? id) async{
-     await _api!.removeDocument(id) ;
-     return ;
-  }
-  Future updateProduct(Product data,String? id) async{
-    await _api!.updateDocument(data.toJson(), id) ;
-    return ;
+  Future removeProduct(String? id) async {
+    await _api!.removeDocument(id);
+    notifyListeners();
+    return;
   }
 
-  Future addProduct(Product data) async{
-    var result  = await _api!.addDocument(data.toJson()) ;
-
-    return ;
-
+  Future updateProduct(Product data, String? id) async {
+    await _api!.updateDocument(data.toJson(), id);
+    notifyListeners();
+    // return;
   }
 
-
+  Future addProduct(Product data) async {
+    var result = await _api!.addDocument(data.toJson());
+    notifyListeners();
+    return;
+  }
 }
