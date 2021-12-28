@@ -7,6 +7,7 @@ class Api {
   late CollectionReference ref;
 
   Api(this.path) {
+    print("Fuck path is this: ${path}");
     ref = _db.collection(path);
   }
 

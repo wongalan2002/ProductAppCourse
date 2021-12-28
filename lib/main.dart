@@ -6,7 +6,7 @@ import './locator.dart';
 import './core/viewmodels/CRUDModel.dart';
 
 void main() async {
-  setupLocator();
+  // setupLocator();
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(MyApp());
